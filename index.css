@@ -402,15 +402,15 @@ h1 {
 }
 
 .T1-btn::before {
-  content: "Vocabulary";
+  content: "";
 }
 
 .T2-btn::before {
-  content: "Airport Map";
+  content: "";
 }
 
 .T3-btn::before {
-  content: "Quiz";
+  content: "";
 }
 
 .primary-btn {
