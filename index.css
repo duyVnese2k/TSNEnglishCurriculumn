@@ -44,15 +44,17 @@ body {
 .page-transition {
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--primary), var(--accent), var(--accent-2));
   opacity: 0;
+  transform: scale(1.08);
   pointer-events: none;
   z-index: 9999;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 body.page-transitioning .page-transition {
   opacity: 1;
+  transform: scale(1);
 }
 
 header.hero {
@@ -406,24 +408,14 @@ h1 {
 }
 
 .T2-btn::before {
-  content: "";
+  content: "Airport Map";
 }
 
 .T3-btn::before {
-  content: "";
+  content: "Quiz";
 }
 
-.primary-btn {
-  display: inline-block;
-  margin-top: 1rem;
-  background: var(--primary);
-  color: white;
-  text-decoration: none;
-  padding: 0.8rem 1.2rem;
-  border-radius: 999px;
-  font-weight: 700;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
+
 
 .primary-btn:hover {
   background: var(--primary-dark);
