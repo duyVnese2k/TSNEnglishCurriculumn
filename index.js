@@ -11,6 +11,34 @@ document.querySelectorAll('.speak-btn').forEach((button) => {
     window.speechSynthesis.speak(utterance);
   });
 });
+if (!document.querySelector('.page-transition')) {
+  const transitionOverlay = document.createElement('div');
+  transitionOverlay.className = 'page-transition';
+  transitionOverlay.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(transitionOverlay);
+}
+
+
+document.querySelectorAll('a[href]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+      return;
+    }
+
+    const isExternal = /^https?:\/\//i.test(href);
+    if (isExternal) {
+      return;
+    }
+
+    event.preventDefault();
+    document.body.classList.add('page-transitioning');
+    setTimeout(() => {
+      window.location.href = href;
+    }, 320);
+  });
+});
+
 const slides = Array.from(document.querySelectorAll('.gallery-slide'));
 const dots = Array.from(document.querySelectorAll('.gallery-dot'));
 const prevBtn = document.querySelector('.gallery-btn.prev');
