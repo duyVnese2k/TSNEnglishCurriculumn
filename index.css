@@ -23,6 +23,27 @@
   100% { transform: translateY(0); }
 }
 
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes swing {
+  0% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+  100% { transform: rotate(-3deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes slideDown {
+  0% { transform: translateY(-20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -75,6 +96,7 @@ header.hero {
   backdrop-filter: blur(16px);
   box-shadow: 0 10px 30px rgba(20, 33, 61, 0.08);
   border-bottom: 1px solid var(--border);
+  animation: slideDown 2s ease forwards;
 }
 
 .eyebrow {
@@ -184,7 +206,72 @@ header.hero {
   height: 320px;
   object-fit: cover;
   display: block;
+  cursor: pointer;
+  animation: fadeIn 3s ease;
 }
+.gallery-slide img:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.zoom-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 12, 25, 0.86);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.zoom-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.zoom-modal-content {
+  max-width: min(96vw, 1100px);
+  max-height: min(90vh, 900px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zoom-modal img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.zoom-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text);
+  font-size: 1.6rem;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+
+
 
 .gallery-caption {
   position: absolute;
@@ -332,7 +419,8 @@ h1 {
   font-size: 2.2rem;
   margin-bottom: 0.6rem;
   text-decoration: none;
-  animation: floatUp 2.4s ease-in-out infinite;
+  animation: floatUp 0.75s ease-in-out infinite;
+  
 }
 
 .scene-card h3 {
